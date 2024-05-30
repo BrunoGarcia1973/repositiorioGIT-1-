@@ -63,7 +63,7 @@ router.get('/api/seriesmock/:codigoProd', async function (req, res) {
     (x) => x.CodigoProd == req.params.codigoProd
   );
   if (prod) res.json(prod);
-  else res.status(404).json({ message: 'productora no encontrado' });
+  else res.status(404).json({ message: 'Capitulo no encontrado' });
 });
 
 router.post('/api/seriesmock/', (req, res) => {
@@ -88,9 +88,9 @@ router.put('/api/seriesmock/:codigoProd', (req, res) => {
   if (prod) {
     const { Nombre } = req.body;
     prod.Nombre = Nombre;
-    res.json({ message: 'productora actualizado' });
+    res.json({ message: 'Capitulo actualizado' });
   } else {
-    res.status(404).json({ message: 'productora no encontrado' });
+    res.status(404).json({ message: 'Capitulo no encontrado' });
   }
 });
 
@@ -103,9 +103,9 @@ router.delete('/api/seriesmock/:codigoProd', (req, res) => {
     arr_SeriesMock = arr_SeriesMock.filter(
       (x) => x.CodigoProd == req.params.codigoProd
     );
-    res.json({ message: 'productora eliminado' });
+    res.json({ message: 'Capitulo eliminado' });
   } else {
-    res.status(404).json({ message: 'productora no encontrado' });
+    res.status(404).json({ message: 'Capitulo no encontrado' });
   }
 });
 
