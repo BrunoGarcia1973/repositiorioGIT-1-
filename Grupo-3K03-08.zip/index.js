@@ -3,18 +3,41 @@ const express = require('express');
 // crear servidor
 const app = express();
 
+require("./base-orm/sqlite-init"); // crea la bases de datos sino existe
+
+app.use(express.json());
+
 // controlar ruta
 app.get('/', (req, res) => {
   res.send('Backend inicial dds-backend!');
 });
 
-const alumnossmockRouter = require('./routes/alumnosmock');
-app.use(alumnossmockRouter);
+const documentalesMockRouter = require('./routes/documentalesmock');
+app.use(documentalesMockRouter);
 
-const parcialesmockRouter = require('./routes/parcialesmock');
-app.use(parcialesmockRouter);
+const documentalesRouter = require("./routes/documentales");
+app.use(documentalesRouter);
 
-app.use(express.json());
+////////////////////////////////////////////////////////////////////////
+
+const seriesMockRouter = require('./routes/seriesmock');
+app.use(seriesMockRouter);
+
+///////////////////////////////////////////////////////////////////////
+
+const productoraMockRouter = require('./routes/productoramock');
+app.use(productoraMockRouter);
+
+const productoraRouter = require("./routes/productora");
+app.use(productoraRouter);
+
+////////////////////////////////////////////////////////////////////////
+
+
+const peliculasMockRouter = require('./routes/peliculasmock');
+app.use(peliculasMockRouter);
+
+////////////////////////////////////////////////////////////////////////
 
 // levantar servidor
 const port = 3000;
