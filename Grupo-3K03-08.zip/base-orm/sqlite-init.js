@@ -57,7 +57,7 @@ async function CrearBaseSiNoExiste() {
 
     console.log("tabla documentales creada!");
     await db.run(
-      `insert into articulos values
+      `insert into documentales values
         (11111, 0123, 'Animales salvajes', '2021-02-18'),
         (22222, 0223, 'Animales pasivos', '2021-06-23'),
         (33333, 0323, 'La primera guerra mundial', '2021-02-22'),
