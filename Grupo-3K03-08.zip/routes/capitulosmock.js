@@ -86,7 +86,7 @@ router.post('/api/capitulosmock/', (req, res) => {
   };
 
   // aqui agregar a la coleccion
-  arr_SeriesMock.push(cap);
+  arr_CapitulosMock.push(cap);
 
   res.status(201).json(cap);
 });
