@@ -37,8 +37,19 @@ app.use(productoraRouter);
 const peliculasMockRouter = require('./routes/peliculasmock');
 app.use(peliculasMockRouter);
 
+const peliculasRouter = require("./routes/peliculas");
+app.use(peliculasRouter);
+
 ////////////////////////////////////////////////////////////////////////
 
+const actoresMockRouter = require('./routes/actoresMock');
+app.use(actoresMockRouter);
+
+const actoresRouter = require("./routes/actores");
+app.use(actoresRouter);
+
+
+////////////////////////////////////////////////////////////////////////
 // levantar servidor
 const port = 3000;
 app.listen(port, () => {

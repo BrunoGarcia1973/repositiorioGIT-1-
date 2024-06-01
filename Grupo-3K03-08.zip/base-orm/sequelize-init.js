@@ -12,7 +12,7 @@ const productora = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    Fecha_nacimineto: {
+    Fecha_nacimiento: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -88,6 +88,12 @@ const productora = sequelize.define(
       },
     }
 );
+
+
+
+
+
+
 module.exports = {
     sequelize,
     productora,
