@@ -89,8 +89,101 @@ const productora = sequelize.define(
     }
 );
 
+const series = sequelize.define(
+  "series",
+  {
+    Codigo: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Nombre: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Nombre es requerido",
+        },
+        len: {
+          args: [5, 30],
+          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+        },
+      },
+    },
+    FechaEstreno: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Fecha de Estreno es requerido",
+        }
+      }
+    },
+  },
+  {
+    timestamps: false,
+    tableName: 'series'
+  }
+);
 
-
+const capitulos = sequelize.define(
+  "capitulos",
+  {
+    CodigoCapitulo: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Nombre: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Nombre es requerido",
+        },
+        len: {
+          args: [5, 60],
+          msg: "Nombre debe ser tipo caracteres, entre 5 y 60 de longitud",
+        },
+      },
+      unique: {
+        args: true,
+        msg: "este Nombre ya existe en la tabla!",
+      },
+    },
+    Codigo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Codigo de Serie es requerido",
+        }
+      },
+      references: {
+        model: 'series',
+        key: 'Codigo'
+      }
+    },
+    Duracion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Duración es requerida",
+        }
+      }
+    },
+  },
+  {
+    timestamps: false,
+    tableName: 'capitulos'
+  }
+);
 
 
 
@@ -98,4 +191,6 @@ module.exports = {
     sequelize,
     productora,
     documentales,
+    series,
+    capitulos,
   };

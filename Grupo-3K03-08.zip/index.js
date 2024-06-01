@@ -23,6 +23,17 @@ app.use(documentalesRouter);
 const seriesMockRouter = require('./routes/seriesmock');
 app.use(seriesMockRouter);
 
+const seriesRouter = require("./routes/series");
+app.use(seriesRouter);
+
+///////////////////////////////////////////////////////////////////////
+
+const capitulosMockRouter = require('./routes/capitulosmock');
+app.use(capitulosMockRouter);
+
+const capitulosRouter = require("./routes/capitulos");
+app.use(capitulosRouter);
+
 ///////////////////////////////////////////////////////////////////////
 
 const productoraMockRouter = require('./routes/productoramock');
