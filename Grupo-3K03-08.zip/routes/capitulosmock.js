@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-let arr_CapitulosMock = [
+let arr_SeriesMock = [
   {
     Codigo: 10000,
     CodigoCapitulo: 1000,
