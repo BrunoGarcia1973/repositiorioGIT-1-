@@ -3,52 +3,62 @@ const router = express.Router();
 
 let arr_SeriesMock = [
   {
-    CodigoSerie: 2354,
+    Codigo: 10000,
+    CodigoCapitulo: 1000,
     Nombre: 'De Repente echo de Menos a Todos',
     Duracion: '42:00',
   },
   {
-    CodigoSerie: 9188,
+    Codigo: 20000,
+    CodigoCapitulo: 2000,
     Nombre: 'Written In The Stars',
     Duracion: '43:00',
   },
   {
-    CodigoSerie: 0323,
+    Codigo: 30000,
+    CodigoCapitulo: 3000,
     Nombre: 'The Lost Boy',
     Duracion: '42:00',
   },
   {
-    CodigoSerie: 0423,
+    Codigo: 40000,
+    CodigoCapitulo: 4000,
     Nombre: 'El Asistente de Rachel',
     Duracion: '22:00',
   },
   {
-    CodigoSerie: 0523,
+    Codigo: 50000,
+    CodigoCapitulo: 5000,
     Nombre: 'Terremoto',
     Duracion: '22:00',
   },
   {
-    CodigoSerie: 0623,
+    Codigo: 60000,
+    CodigoCapitulo: 6000,
     Nombre: 'The Gift',
     Duracion: '53:00',
   },
   {
-    CodigoSerie: 0723,
+    Codigo: 70000,
+    CodigoCapitulo: 7000,
     Nombre: 'Amor perdido',
     Duracion: '57:00',
   },
   {
-    CodigoSerie: 0823,
+    Codigo: 80000,
+    CodigoCapitulo: 8000,
     Nombre: 'Revolutions',
     Duracion: '43:00',
   },
   {
-    CodigoSerie: 0923,
+    Codigo: 90000,
+    CodigoCapitulo: 9000,
     Nombre: 'Lion in the Meadow',
     Duracion: '59:00',
   },
   {
-    CodigoSerie: 0233,
+    Codigo: 10001,
+    CodigoCapitulo: 1111,
     Nombre: 'El Padrino',
     Duracion: '23:00',
   },
@@ -58,31 +68,32 @@ router.get('/api/seriesmock', async function (req, res) {
   res.json(arr_SeriesMock);
 });
 
-router.get('/api/seriesmock/:codigoSerie', async function (req, res) {
-  let prod = arr_SeriesMock.find(
-    (x) => x.CodigoSerie == req.params.codigoSerie
+router.get('/api/seriesmock/:codigoCapitulo', async function (req, res) {
+  let cap = arr_SeriesMock.find(
+    (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
-  if (prod) res.json(prod);
+  if (cap) res.json(cap);
   else res.status(404).json({ message: 'Capitulo no encontrado' });
 });
 
 router.post('/api/seriesmock/', (req, res) => {
   const { Nombre, Duracion } = req.body;
-  let series = {
+  let cap = {
+    Codigo: Math.floor(10000 + Math.random() * 90000),
+    CodigoCapitulo: Math.floor(1000 + Math.random() * 9000),
     Nombre,
     Duracion,
-    CodigoSerie: Math.floor(10000 + Math.random() * 90000),
   };
 
   // aqui agregar a la coleccion
-  arr_SeriesMock.push(series);
+  arr_SeriesMock.push(cap);
 
-  res.status(201).json(series);
+  res.status(201).json(cap);
 });
 
-router.put('/api/seriesmock/:codigoSerie', (req, res) => {
+router.put('/api/seriesmock/:codigoCapitulo', (req, res) => {
   let cap = arr_SeriesMock.find(
-    (x) => x.CodigoSerie== req.params.codigoSerie
+    (x) => x.CodigoCapitulo== req.params.codigoCapitulo
   );
 
   if (cap) {
@@ -94,14 +105,14 @@ router.put('/api/seriesmock/:codigoSerie', (req, res) => {
   }
 });
 
-router.delete('/api/seriesmock/:codigoSerie', (req, res) => {
+router.delete('/api/seriesmock/:codigoCapitulo', (req, res) => {
   let cap = arr_SeriesMock.find(
-    (x) => x.CodigoSerie == req.params.codigoSerie
+    (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
 
   if (cap) {
     arr_SeriesMock = arr_SeriesMock.filter(
-      (x) => x.CodigoSerie == req.params.codigoSerie
+      (x) => x.CodigoCapitulo == req.params.codigoCapitulo
     );
     res.json({ message: 'Capitulo eliminado' });
   } else {
