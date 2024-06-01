@@ -65,11 +65,11 @@ let arr_CapitulosMock = [
 ];
 
 router.get('/api/capitulosmock', async function (req, res) {
-  res.json(arr_SeriesMock);
+  res.json(arr_CapitulosMock);
 });
 
 router.get('/api/capitulosmock/:codigoCapitulo', async function (req, res) {
-  let cap = arr_SeriesMock.find(
+  let cap = arr_CapitulosMock.find(
     (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
   if (cap) res.json(cap);
@@ -92,7 +92,7 @@ router.post('/api/capitulosmock/', (req, res) => {
 });
 
 router.put('/api/capitulosmock/:codigoCapitulo', (req, res) => {
-  let cap = arr_SeriesMock.find(
+  let cap = arr_CapitulosMock.find(
     (x) => x.CodigoCapitulo== req.params.codigoCapitulo
   );
 
@@ -106,12 +106,12 @@ router.put('/api/capitulosmock/:codigoCapitulo', (req, res) => {
 });
 
 router.delete('/api/capitulosmock/:codigoCapitulo', (req, res) => {
-  let cap = arr_SeriesMock.find(
+  let cap = arr_CapitulosMock.find(
     (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
 
   if (cap) {
-    arr_SeriesMock = arr_SeriesMock.filter(
+    arr_CapitulosMock = arr_CapitulosMock.filter(
       (x) => x.CodigoCapitulo == req.params.codigoCapitulo
     );
     res.json({ message: 'Capitulo eliminado' });
