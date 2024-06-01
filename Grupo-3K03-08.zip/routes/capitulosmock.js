@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-let arr_SeriesMock = [
+let arr_CapitulosMock = [
   {
     Codigo: 10000,
     CodigoCapitulo: 1000,
@@ -64,11 +64,11 @@ let arr_SeriesMock = [
   },
 ];
 
-router.get('/api/seriesmock', async function (req, res) {
+router.get('/api/capitulosmock', async function (req, res) {
   res.json(arr_SeriesMock);
 });
 
-router.get('/api/seriesmock/:codigoCapitulo', async function (req, res) {
+router.get('/api/capitulosmock/:codigoCapitulo', async function (req, res) {
   let cap = arr_SeriesMock.find(
     (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
@@ -76,7 +76,7 @@ router.get('/api/seriesmock/:codigoCapitulo', async function (req, res) {
   else res.status(404).json({ message: 'Capitulo no encontrado' });
 });
 
-router.post('/api/seriesmock/', (req, res) => {
+router.post('/api/capitulosmock/', (req, res) => {
   const { Nombre, Duracion } = req.body;
   let cap = {
     Codigo: Math.floor(10000 + Math.random() * 90000),
@@ -91,7 +91,7 @@ router.post('/api/seriesmock/', (req, res) => {
   res.status(201).json(cap);
 });
 
-router.put('/api/seriesmock/:codigoCapitulo', (req, res) => {
+router.put('/api/capitulosmock/:codigoCapitulo', (req, res) => {
   let cap = arr_SeriesMock.find(
     (x) => x.CodigoCapitulo== req.params.codigoCapitulo
   );
@@ -105,7 +105,7 @@ router.put('/api/seriesmock/:codigoCapitulo', (req, res) => {
   }
 });
 
-router.delete('/api/seriesmock/:codigoCapitulo', (req, res) => {
+router.delete('/api/capitulosmock/:codigoCapitulo', (req, res) => {
   let cap = arr_SeriesMock.find(
     (x) => x.CodigoCapitulo == req.params.codigoCapitulo
   );
