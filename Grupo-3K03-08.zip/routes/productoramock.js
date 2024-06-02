@@ -3,52 +3,52 @@ const router = express.Router();
 
 let arr_ProductoraMock = [
   {
-    CodigoProd: 0123,
+    CodigoProd: 1123,
     Nombre: 'Rodrigo',
     Fecha_nacimiento: '1973-05-24',
   },
   {
-    CodigoProd: 0223,
+    CodigoProd: 1223,
     Nombre: 'Ulises',
     Fecha_nacimiento: '1986-05-22',
   },
   {
-    CodigoProd: 0323,
+    CodigoProd: 1323,
     Nombre: 'Cristian',
     Fecha_nacimiento: '1970-05-24',
   },
   {
-    CodigoProd: 0423,
+    CodigoProd: 1423,
     Nombre: 'Damian',
     Fecha_nacimiento: '1990-04-17',
   },
   {
-    CodigoProd: 0523,
+    CodigoProd: 1523,
     Nombre: 'Euguenia',
     Fecha_nacimiento: '1950-12-24',
   },
   {
-    CodigoProd: 0623,
+    CodigoProd: 1623,
     Nombre: 'Magali',
     Fecha_nacimiento: '1973-05-24',
   },
   {
-    CodigoProd: 0723,
+    CodigoProd: 1723,
     Nombre: 'Cristina',
     Fecha_nacimiento: '2000-05-30',
   },
   {
-    CodigoProd: 0823,
+    CodigoProd: 1823,
     Nombre: 'Rufino',
     Fecha_nacimiento: '1952-02-01',
   },
   {
-    CodigoProd: 0923,
+    CodigoProd: 1923,
     Nombre: 'Anabela',
     Fecha_nacimiento: '1973-05-22',
   },
   {
-    CodigoProd: 0233,
+    CodigoProd: 1233,
     Nombre: 'Vanesa',
     Fecha_nacimiento: '1993-11-19',
   },
@@ -71,7 +71,7 @@ router.post('/api/productoramock/', (req, res) => {
   let parcial = {
     Nombre,
     Fecha_nacimiento,
-    CodigoProd: Math.floor(10000 + Math.random() * 90000),
+    CodigoProd: Math.floor(1000 + Math.random() * 9000),
   };
 
   // aqui agregar a la coleccion

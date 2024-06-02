@@ -61,6 +61,15 @@ app.use(actoresRouter);
 
 
 ////////////////////////////////////////////////////////////////////////
+
+// configurar servidor
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*", // origin: 'https://Grupo-3K03-08.azurewebsites.net'
+  })
+);
+
 // levantar servidor
 const port = 3000;
 app.listen(port, () => {
