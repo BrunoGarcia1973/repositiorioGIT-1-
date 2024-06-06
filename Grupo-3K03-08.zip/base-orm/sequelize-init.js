@@ -186,6 +186,91 @@ const capitulos = sequelize.define(
 );
 
 
+const peliculas = sequelize.define(
+  "peliculas",
+  {
+    CodigoPel: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Nombre: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "El nombre de la pelicula es requerido",
+        },
+        len: {
+          args: [5, 30],
+          msg: "El nombre de la pelicula debe ser tipo caracteres, entre 5 y 30 de longitud",
+        },
+      },
+    },
+    Fecha_lanzamiento: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "La fecha de Lanzamiento de la pelicula es requerido",
+        }
+      }
+    },
+  },
+);
+
+
+const actores = sequelize.define(
+  "actores",
+  {
+    CodigoAct: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    CodigoPel: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "El Codigo de actor es requerido",
+        }
+      }
+    },
+    Nombre: {
+      type: DataTypes.STRING(60),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "El nombre de el actor es requerido",
+        },
+        len: {
+          args: [5, 60],
+          msg: "El nombre de el actor debe ser tipo caracteres, entre 5 y 60 de longitud",
+        },
+      },
+      unique: {
+        args: true,
+        msg: "Este Nombre ya existe en la tabla!",
+      },
+    },
+    Fecha_nacimiento: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "La fecha de nacimiento es requerido",
+        }
+      }
+    },
+  }
+);
+
 
 module.exports = {
     sequelize,
@@ -193,4 +278,6 @@ module.exports = {
     documentales,
     series,
     capitulos,
+    peliculas,
+    actores,
   };
