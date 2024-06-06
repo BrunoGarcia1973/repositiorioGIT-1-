@@ -3,7 +3,7 @@ const express = require('express');
 // crear servidor
 const app = express();
 
-require("./base-orm/sqlite-init"); // crea la bases de datos sino existe
+require('./base-orm/sqlite-init'); // crea la bases de datos sino existe
 
 app.use(express.json());
 
@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 const documentalesMockRouter = require('./routes/documentalesmock');
 app.use(documentalesMockRouter);
 
-const documentalesRouter = require("./routes/documentales");
+const documentalesRouter = require('./routes/documentales');
 app.use(documentalesRouter);
 
 ////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ app.use(documentalesRouter);
 const seriesMockRouter = require('./routes/seriesmock');
 app.use(seriesMockRouter);
 
-const seriesRouter = require("./routes/series");
+const seriesRouter = require('./routes/series');
 app.use(seriesRouter);
 
 ///////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ app.use(seriesRouter);
 const capitulosMockRouter = require('./routes/capitulosmock');
 app.use(capitulosMockRouter);
 
-const capitulosRouter = require("./routes/capitulos");
+const capitulosRouter = require('./routes/capitulos');
 app.use(capitulosRouter);
 
 ///////////////////////////////////////////////////////////////////////
@@ -39,16 +39,15 @@ app.use(capitulosRouter);
 const productoraMockRouter = require('./routes/productoramock');
 app.use(productoraMockRouter);
 
-const productoraRouter = require("./routes/productora");
+const productoraRouter = require('./routes/productora');
 app.use(productoraRouter);
 
 ////////////////////////////////////////////////////////////////////////
 
-
 const peliculasMockRouter = require('./routes/peliculasmock');
 app.use(peliculasMockRouter);
 
-const peliculasRouter = require("./routes/peliculas");
+const peliculasRouter = require('./routes/peliculas');
 app.use(peliculasRouter);
 
 ////////////////////////////////////////////////////////////////////////
@@ -56,22 +55,26 @@ app.use(peliculasRouter);
 const actoresMockRouter = require('./routes/actoresMock');
 app.use(actoresMockRouter);
 
-const actoresRouter = require("./routes/actores");
+const actoresRouter = require('./routes/actores');
 app.use(actoresRouter);
-
 
 ////////////////////////////////////////////////////////////////////////
 
 // configurar servidor
-const cors = require("cors");
+const cors = require('cors');
 app.use(
   cors({
-    origin: "*", // origin: 'https://Grupo-3K03-08.azurewebsites.net'
+    origin: '*', // origin: 'https://Grupo-3K03-08.azurewebsites.net'
   })
 );
 
 // levantar servidor
-const port = 3000;
-app.listen(port, () => {
-  console.log(`sitio escuchando en el puerto ${port}`);
-});
+if (!module.parent) {
+  // si no es llamado por otro módulo, es decir, si es el módulo principal -> levantamos el servidor
+  const port = process.env.PORT || 3000; // en producción se usa el puerto de la variable de entorno PORT
+  app.locals.fechaInicio = new Date();
+  app.listen(port, () => {
+    console.log(`sitio escuchando en el puerto ${port}`);
+  });
+}
+module.exports = app; // para testing
