@@ -1,40 +1,33 @@
 const request = require("supertest");
 const app = require("../index");
-const articuloAlta = {
-  Nombre: "Articulo " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  Precio: 10.5,
-  CodigoDeBarra: "1234567890123",
-  IdArticuloFamilia: 1,
-  Stock: 11,
-  FechaAlta: new Date().toISOString(),
+const productoraAlta = {
+  Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
+  CodigoProd: 11111,
+  Codigo: 1123,
+  Fecha_nacimiento: new Date().toISOString(),
   Activo: true,
 };
-const articuloModificacion = {
-  IdArticulo: 1,
-  Nombre: "Articulo " + (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  Precio: 10.5,
-  CodigoDeBarra: "1234567890123",
-  IdArticuloFamilia: 1,
-  Stock: 11,
-  FechaAlta: new Date().toISOString(),
+const productoraModificacion = {
+  Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
+  CodigoProd: 11111,
+  Codigo: 1123,
+  Fecha_nacimiento: new Date().toISOString(),
   Activo: true,
 };
 
-// test route/articulos GET
-describe("GET /api/articulos", () => {
-  it("Deberia devolver todos los artículos", async () => {
-    const res = await request(app).get("/api/articulos");
+// test route/productora GET
+describe("GET /api/productora", () => {
+  it("Deberia devolver todas las productoras", async () => {
+    const res = await request(app).get("/api/productora");
     expect(res.statusCode).toEqual(200);
 
     expect(res.body).toEqual(
       expect.objectContaining({
         Items: expect.arrayContaining([
           expect.objectContaining({
-            IdArticulo: expect.any(Number),
+            CodigoProd: expect.any(Number),
             Nombre: expect.any(String),
-            Precio: expect.any(Number),
-            Stock: expect.any(Number),
-            FechaAlta: expect.any(String),
+            Fecha_nacimiento: expect.any(String),
             Activo: expect.any(Boolean)
           }),
         ]),
@@ -44,10 +37,10 @@ describe("GET /api/articulos", () => {
   });
 });
 
-// test route/articulos GET
-describe("GET /api/articulos con filtros", () => {
-  it("Deberia devolver los articulos según filtro ", async () => {
-    const res = await request(app).get("/api/articulos?Nombre=AIRE&Activo=true&Pagina=1");
+// test route/productora GET
+describe("GET /api/productora con filtros", () => {
+  it("Deberia devolver las productoras según filtro ", async () => {
+    const res = await request(app).get("/api/productora?Nombre=AIRE&Activo=true&Pagina=1");
     expect(res.statusCode).toEqual(200);
 
     expect(verificarPropiedades(res.body.Items) ).toEqual(true );
@@ -64,60 +57,54 @@ describe("GET /api/articulos con filtros", () => {
   });
 });
 
-// test route/articulos/:id GET
-describe("GET /api/articulos/:id", () => {
-  it("Deberia devolver el artículo con el id 1", async () => {
-    const res = await request(app).get("/api/articulos/1");
+// test route/productora/:codigoProd GET
+describe("GET /api/productora/:codigoProd", () => {
+  it("Deberia devolver la productora con el codigo 11111", async () => {
+    const res = await request(app).get("/api/productora/11111");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        IdArticulo: expect.any(Number),
+        CodigoProd: expect.any(Number),
         Nombre: expect.any(String),
-        Precio: expect.any(Number),
-        CodigoDeBarra: expect.any(String),
-        IdArticuloFamilia: expect.any(Number),
-        Stock: expect.any(Number),
-        FechaAlta: expect.any(String),
+        Fecha_nacimiento: expect.any(String),
         Activo: expect.any(Boolean),
+        Codigo: expect.any(Number),
       })
     );
   });
 });
 
-// test route/articulos POST
-describe("POST /api/articulos", () => {
-  it("Deberia devolver el articulo que acabo de crear", async () => {
-    const res = await request(app).post("/api/articulos").send(articuloAlta);
+// test route/productora POST
+describe("POST /api/productora", () => {
+  it("Deberia devolver la prudctora que acabo de crear", async () => {
+    const res = await request(app).post("/api/productora").send(productoraAlta);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        IdArticulo: expect.any(Number),
+        CodigoProd: expect.any(Number),
         Nombre: expect.any(String),
-        Precio: expect.any(Number),
-        CodigoDeBarra: expect.any(String),
-        IdArticuloFamilia: expect.any(Number),
-        Stock: expect.any(Number),
-        FechaAlta: expect.any(String),
+        Fecha_nacimiento: expect.any(String),
         Activo: expect.any(Boolean),
+        Codigo: expect.any(Number),
       })
     );
   });
 });
 
-// test route/articulos/:id PUT
-describe("PUT /api/articulos/:id", () => {
-  it("Deberia devolver el articulo con el id 1 modificado", async () => {
+// test route/productora/:codigoProd PUT
+describe("PUT /api/productora/:codigoProd", () => {
+  it("Deberia devolver la productora con el codigo 11111 modificado", async () => {
     const res = await request(app)
-      .put("/api/articulos/1")
-      .send(articuloModificacion);
+      .put("/api/productora/11111")
+      .send(productoraModificacion);
     expect(res.statusCode).toEqual(204);
   });
 });
 
-// test route/articulos/:id DELETE
-describe("DELETE /api/articulos/:id", () => {
-  it("Debería devolver el artículo con el id 1 borrado", async () => {
-    const res = await request(app).delete("/api/articulos/1");
+// test route/productora/:codigoProd DELETE
+describe("DELETE /api/productora/:codigoProd", () => {
+  it("Debería devolver la productora con el codigo 11111 borrado", async () => {
+    const res = await request(app).delete("/api/productora/11111");
     expect(res.statusCode).toEqual(200);
 
     // baja lógica, no se borra realmente

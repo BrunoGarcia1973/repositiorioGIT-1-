@@ -25,43 +25,12 @@ async function CrearBaseSiNoExiste() {
 
   existe = false;
 
+
+
   res = await db.get(
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productora'",
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'documentales'",
     []
   );
-
-  if (res.contar > 0) existe = true;
-  if (!existe) {
-    await db.run(
-      `CREATE table productora( 
-              CodigoProd INTEGER PRIMARY KEY AUTOINCREMENT
-            , Nombre text NOT NULL UNIQUE
-            , Fecha_nacimiento text
-            , Activo boolean
-            , Codigo integer,
-             FOREIGN KEY (Codigo) REFERENCES documentales(Codigo)
-            );`
-    );
-    console.log("tabla productora creada!");
-    await db.run(
-      `insert into productora values
-      (1123, 'Rodrigo', '1973-05-24', 1, 11111),
-      (1223, 'Ulises', '1986-05-22', 1, 22222),
-      (1323, 'Cristian', '1970-05-24', 1, 33333),
-      (1423, 'Damian', '1990-04-17', 1, 44444),
-      (1523, 'Euguenia', '1950-12-24', 1, 55555),
-      (1623, 'Magali', '1973-05-24', 1, 66666),
-      (1723, 'Cristina', '2000-05-30', 1, 77777),
-      (1823, 'Rufino', '1952-02-01', 1, 88888),
-      (1923, 'Anabela', '1973-05-22', 99999),
-      (1233, 'Vanesa', '1993-11-19', 12345);`
-    );
-  
-  }
-  existe = false;
-  sql =
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'documentales'";
-  res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
@@ -89,6 +58,39 @@ async function CrearBaseSiNoExiste() {
          
     );
  }
+ existe = false;
+ sql =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'productora'";
+  res = await db.get(sql, []);
+  if (res.contar > 0) existe = true;
+  if (!existe) {
+    await db.run(
+      `CREATE table productora( 
+            CodigoProd INTEGER PRIMARY KEY AUTOINCREMENT
+          , Nombre text NOT NULL UNIQUE
+          , Fecha_nacimiento text
+          , Activo boolean
+          , Codigo integer,
+           FOREIGN KEY (Codigo) REFERENCES documentales(Codigo)
+          );`
+  );
+  console.log("tabla productora creada!");
+  await db.run(
+    `insert into productora values
+    (1123, 'Rodrigo', '1973-05-24', 1, 11111),
+    (1223, 'Ulises', '1986-05-22', 1, 22222),
+    (1323, 'Cristian', '1970-05-24', 1, 33333),
+    (1423, 'Damian', '1990-04-17', 1, 44444),
+    (1523, 'Euguenia', '1950-12-24', 1, 55555),
+    (1623, 'Magali', '1973-05-24', 1, 66666),
+    (1723, 'Cristina', '2000-05-30', 1, 77777),
+    (1823, 'Rufino', '1952-02-01', 1, 88888),
+    (1923, 'Anabela', '1973-05-22', 99999),
+    (1233, 'Vanesa', '1993-11-19', 12345);`
+  );
+
+}
+
  // cerrar la base
  db.close();
 

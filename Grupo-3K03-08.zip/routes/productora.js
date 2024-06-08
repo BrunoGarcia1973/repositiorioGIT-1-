@@ -15,11 +15,11 @@ router.get('/api/productora', async function (req, res, next) {
       [Op.like]: '%' + req.query.Nombre + '%',
     };
   }
-  //if (req.query.Activo != undefined && req.query.Activo !== '') {
+  if (req.query.Activo != undefined && req.query.Activo !== '') {
     // true o false en el modelo, en base de datos es 1 o 0
     // convertir el string a booleano
-    //where.Activo = req.query.Activo === 'true';
-  //}
+    where.Activo = req.query.Activo === 'true';
+  }
   const Pagina = req.query.Pagina ?? 1;
   const TamañoPagina = 10;
   const { count, rows } = await db.productora.findAndCountAll({
