@@ -2,15 +2,15 @@ const request = require("supertest");
 const app = require("../index");
 const productoraAlta = {
   Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  CodigoProd: 11111,
-  Codigo: 1123,
+  Codigo: 11111,
+  CodigoProd: 1123,
   Fecha_nacimiento: new Date().toISOString(),
   Activo: true,
 };
 const productoraModificacion = {
   Nombre: (() => (Math.random() + 1).toString(36).substring(2))(), // Genera un nombre aleatorio
-  CodigoProd: 11111,
-  Codigo: 1123,
+  Codigo: 11111,
+  CodigoProd: 1123,
   Fecha_nacimiento: new Date().toISOString(),
   Activo: true,
 };
@@ -40,14 +40,14 @@ describe("GET /api/productora", () => {
 // test route/productora GET
 describe("GET /api/productora con filtros", () => {
   it("Deberia devolver las productoras según filtro ", async () => {
-    const res = await request(app).get("/api/productora?Nombre=AIRE&Activo=true&Pagina=1");
+    const res = await request(app).get("/api/productora?Nombre=Rodrigo&Activo=true&Pagina=1");
     expect(res.statusCode).toEqual(200);
 
     expect(verificarPropiedades(res.body.Items) ).toEqual(true );
   
     function verificarPropiedades(array) {
       for (let i = 0; i < array.length; i++) {
-        if ( !array[i].Nombre.includes("AIRE") || !array[i].Activo ) {
+        if ( !array[i].Nombre.includes("Rodrigo") || !array[i].Activo ) {
           return false;
         }
       }
@@ -59,8 +59,8 @@ describe("GET /api/productora con filtros", () => {
 
 // test route/productora/:codigoProd GET
 describe("GET /api/productora/:codigoProd", () => {
-  it("Deberia devolver la productora con el codigo 11111", async () => {
-    const res = await request(app).get("/api/productora/11111");
+  it("Deberia devolver la productora con el codigo 1123", async () => {
+    const res = await request(app).get("/api/productora/1123");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
@@ -93,9 +93,9 @@ describe("POST /api/productora", () => {
 
 // test route/productora/:codigoProd PUT
 describe("PUT /api/productora/:codigoProd", () => {
-  it("Deberia devolver la productora con el codigo 11111 modificado", async () => {
+  it("Deberia devolver la productora con el codigo 1123 modificado", async () => {
     const res = await request(app)
-      .put("/api/productora/11111")
+      .put("/api/productora/1123")
       .send(productoraModificacion);
     expect(res.statusCode).toEqual(204);
   });
@@ -103,8 +103,8 @@ describe("PUT /api/productora/:codigoProd", () => {
 
 // test route/productora/:codigoProd DELETE
 describe("DELETE /api/productora/:codigoProd", () => {
-  it("Debería devolver la productora con el codigo 11111 borrado", async () => {
-    const res = await request(app).delete("/api/productora/11111");
+  it("Debería devolver la productora con el codigo 1123 borrado", async () => {
+    const res = await request(app).delete("/api/productora/1123");
     expect(res.statusCode).toEqual(200);
 
     // baja lógica, no se borra realmente
