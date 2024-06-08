@@ -38,8 +38,19 @@ const productora = sequelize.define(
           },
         },
       },
-    },
-  );
+    Activo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notNull: {
+            args: true,
+            msg: "Activo es requerido",
+          }
+        }
+      },
+  },
+);
+  
   const documentales = sequelize.define(
     "documentales",
     {

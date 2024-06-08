@@ -36,13 +36,11 @@ app.use(capitulosRouter);
 
 ///////////////////////////////////////////////////////////////////////
 
-const productoraMockRouter = require('./routes/productoramock');
-app.use(productoraMockRouter);
-
 const productoraRouter = require('./routes/productora');
 app.use(productoraRouter);
 
 ////////////////////////////////////////////////////////////////////////
+
 
 const peliculasMockRouter = require('./routes/peliculasmock');
 app.use(peliculasMockRouter);
@@ -57,6 +55,13 @@ app.use(actoresMockRouter);
 
 const actoresRouter = require('./routes/actores');
 app.use(actoresRouter);
+
+
+////////////////////////////////////////////////////////////////////////
+
+// seguridad 
+const seguridadRouter = require("./routes/seguridad");
+app.use(seguridadRouter);
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -73,8 +78,8 @@ if (!module.parent) {
   // si no es llamado por otro módulo, es decir, si es el módulo principal -> levantamos el servidor
   const port = process.env.PORT || 3000; // en producción se usa el puerto de la variable de entorno PORT
   app.locals.fechaInicio = new Date();
-  app.listen(port, () => {
-    console.log(`sitio escuchando en el puerto ${port}`);
-  });
+app.listen(port, () => {
+  console.log(`sitio escuchando en el puerto ${port}`);
+});
 }
 module.exports = app; // para testing
