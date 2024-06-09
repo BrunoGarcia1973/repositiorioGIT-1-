@@ -179,6 +179,16 @@ const capitulos = sequelize.define(
         key: 'Codigo'
       }
     },
+    Activo: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Activo es requerido",
+        }
+      }
+    },
     Duracion: {
       type: DataTypes.STRING,
       allowNull: false,

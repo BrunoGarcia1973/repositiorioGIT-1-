@@ -28,9 +28,6 @@ app.use(seriesRouter);
 
 ///////////////////////////////////////////////////////////////////////
 
-const capitulosMockRouter = require('./routes/capitulosmock');
-app.use(capitulosMockRouter);
-
 const capitulosRouter = require('./routes/capitulos');
 app.use(capitulosRouter);
 
