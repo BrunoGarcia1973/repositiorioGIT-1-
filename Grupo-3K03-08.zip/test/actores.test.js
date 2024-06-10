@@ -31,7 +31,7 @@ describe("GET /api/actores/:CodigoAct", function () {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        IdArticuloFamilia: 54328,
+        CodigoAct: 54328,
         Nombre: expect.any(String),
       })
     );

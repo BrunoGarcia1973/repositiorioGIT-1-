@@ -103,7 +103,7 @@ const productora = sequelize.define(
 const series = sequelize.define(
   "series",
   {
-    Codigo: {
+    CodigoSerie: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -129,6 +129,26 @@ const series = sequelize.define(
         notNull: {
           args: true,
           msg: "Fecha de Estreno es requerido",
+        }
+      }
+    },
+    CodigoCapitulo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Código del capítulo es requerido",
+        }
+      }
+    },
+    Activo: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Activo es requerido",
         }
       }
     },
@@ -164,40 +184,6 @@ const capitulos = sequelize.define(
         args: true,
         msg: "este Nombre ya existe en la tabla!",
       },
-    },
-    Codigo: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Codigo de Serie es requerido",
-        }
-      },
-      references: {
-        model: 'series',
-        key: 'Codigo'
-      }
-    },
-    Activo: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Activo es requerido",
-        }
-      }
-    },
-    Duracion: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Duración es requerida",
-        }
-      }
     },
   },
   {
