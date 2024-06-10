@@ -1,7 +1,7 @@
 // configurar ORM sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 //const sequelize = new Sequelize("sqlite:" + process.env.base );
-const sequelize = new Sequelize("sqlite:" + "./.data/pymes.db");
+const sequelize = new Sequelize("sqlite:" + "./.data/pymes.db"); //VER QUE NOMBRE LE PONEMOS, PORQUE PYMES NO VA
 
 // definicion del modelo de datos
   
@@ -239,7 +239,39 @@ const peliculas = sequelize.define(
         }
       }
     },
+    CodigoAct: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "El Codigo de actor es requerido",
+        }
+      }
+    },
+    Activo: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Activo es requerido",
+        }
+      }
+    },
   },
+  {
+    // pasar a mayusculas
+    hooks: {
+      beforeValidate: function (articulo, options) {
+        if (typeof articulo.Nombre === "string") {
+          articulo.Nombre = articulo.Nombre.toUpperCase().trim();
+        }
+      },
+    },
+
+    timestamps: false,
+  }
 );
 
 
@@ -250,16 +282,6 @@ const actores = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
-    CodigoPel: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "El Codigo de actor es requerido",
-        }
-      }
     },
     Nombre: {
       type: DataTypes.STRING(60),
@@ -279,17 +301,20 @@ const actores = sequelize.define(
         msg: "Este Nombre ya existe en la tabla!",
       },
     },
-    Fecha_nacimiento: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "La fecha de nacimiento es requerido",
-        }
+    
+  },
+  {
+  // pasar a mayusculas
+  hooks: {
+    beforeValidate: function (articulofamilia, options) {
+      if (typeof articulofamilia.Nombre === "string") {
+        articulofamilia.Nombre = articulofamilia.Nombre.toUpperCase().trim();
       }
     },
-  }
+  },
+
+  timestamps: false,
+}
 );
 
 
