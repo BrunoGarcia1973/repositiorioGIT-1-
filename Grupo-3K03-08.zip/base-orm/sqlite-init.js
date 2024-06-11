@@ -97,24 +97,27 @@ async function CrearBaseSiNoExiste() {
   if (!existe) {
     await db.run(
       `CREATE table series(
-        Codigo INTEGER PRIMARY KEY AUTOINCREMENT,
-        Nombre text NOT NULL UNIQUE,
-        FechaEstreno text
+        CodigoSerie INTEGER PRIMARY KEY AUTOINCREMENT,
+        ,CodigoCapitulo integer,
+        ,Nombre text NOT NULL UNIQUE,
+        ,FechaEstreno text
+        ,Activo boolean,
+        FOREIGN KEY (CodigoCapitulo) REFERENCES capitulos(CodigoCapitulo)
       );`
     );
     console.log("tabla series creada!");
     await db.run(
       `insert into series values
-        (10000, 'One Tree Hill', '2003-09-23'),
-        (20000, 'Gilmore Girls', '2000-10-05'),
-        (30000, 'Gossip Girl', '2007-09-19'),
-        (40000, 'Friends', '1994-09-22'),
-        (50000, 'Modern Family', '2009-09-23'),
-        (60000, 'Game Of Thrones', '2011-04-17'),
-        (70000, 'The Summer I Turned Pretty', '2022-06-17'),
-        (80000, 'My Life With The Walter Boys', '2023-12-07'),
-        (90000, 'Succession', '2018-06-03'),
-        (10001, 'How I Met Your Mother', '2005-09-19');`
+        (10000, 1000, 'One Tree Hill', '2003-09-23', 1),
+        (20000, 2000, 'Gilmore Girls', '2000-10-05', 1),
+        (30000, 3000, 'Gossip Girl', '2007-09-19', 1),
+        (40000, 4000, 'Friends', '1994-09-22', 1),
+        (50000, 5000, 'Modern Family', '2009-09-23', 1),
+        (60000, 6000, 'Game Of Thrones', '2011-04-17', 1),
+        (70000, 7000, 'The Summer I Turned Pretty', '2022-06-17', 1),
+        (80000, 8000, 'My Life With The Walter Boys', '2023-12-07', 1),
+        (90000, 9000, 'Succession', '2018-06-03', 1),
+        (10001, 1111, 'How I Met Your Mother', '2005-09-19', 1);`
     );
 
   // Crear tabla capitulos si no existe
@@ -125,25 +128,23 @@ async function CrearBaseSiNoExiste() {
   if (!existe) {
     await db.run(
       `CREATE table capitulos(
-        Codigo INTEGER PRIMARY KEY AUTOINCREMENT,
-        CodigoCapitulo INTEGER,
-        Nombre text NOT NULL,
-        Duracion text
+        CodigoCapitulo INTEGER PRIMARY KEY AUTOINCREMENT,
+        Nombre text NOT NULL UNIQUE,
       );`
     );
     console.log("tabla capitulos creada!");
     await db.run(
       `insert into capitulos values
-        (10000, 1000, 'De Repente echo de Menos a Todos', '42:00'),
-        (20000, 2000, 'Written In The Stars', '43:00'),
-        (30000, 3000, 'The Lost Boy', '42:00'),
-        (40000, 4000, 'El Asistente de Rachel', '22:00'),
-        (50000, 5000, 'Terremoto', '22:00'),
-        (60000, 6000, 'The Gift', '53:00'),
-        (70000, 7000, 'Amor perdido', '57:00'),
-        (80000, 8000, 'Revolutions', '43:00'),
-        (90000, 9000, 'Lion in the Meadow', '59:00'),
-        (10001, 1111, 'El Padrino', '23:00');`
+        (1000, 'De Repente echo de Menos a Todos'),
+        (2000, 'Written In The Stars'),
+        (3000, 'The Lost Boy'),
+        (4000, 'El Asistente de Rachel'),
+        (5000, 'Terremoto'),
+        (6000, 'The Gift'),
+        (7000, 'Amor perdido'),
+        (8000, 'Revolutions'),
+        (9000, 'Lion in the Meadow'),
+        (1111, 'El Padrino');`
     );
   }
   }
