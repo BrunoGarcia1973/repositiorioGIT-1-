@@ -37,10 +37,6 @@ app.use(productoraRouter);
 
 ////////////////////////////////////////////////////////////////////////
 
-
-const peliculasMockRouter = require('./routes/peliculasmock');
-app.use(peliculasMockRouter);
-
 const peliculasRouter = require('./routes/peliculas');
 app.use(peliculasRouter);
 
