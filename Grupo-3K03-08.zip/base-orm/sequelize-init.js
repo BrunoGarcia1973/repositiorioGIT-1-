@@ -114,11 +114,11 @@ const series = sequelize.define(
       validate: {
         notEmpty: {
           args: true,
-          msg: "Nombre es requerido",
+          msg: "El nombre de la serie es requerido",
         },
         len: {
           args: [5, 30],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+          msg: "El nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
         },
       },
     },
@@ -128,7 +128,7 @@ const series = sequelize.define(
       validate: {
         notNull: {
           args: true,
-          msg: "Fecha de Estreno es requerido",
+          msg: "Fecha de Estreno es requerida",
         }
       }
     },
@@ -173,11 +173,11 @@ const capitulos = sequelize.define(
       validate: {
         notEmpty: {
           args: true,
-          msg: "Nombre es requerido",
+          msg: "Nombre del capítulo es requerido",
         },
         len: {
           args: [5, 60],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 60 de longitud",
+          msg: "El nombre del debe ser tipo caracteres, entre 5 y 60 de longitud",
         },
       },
       unique: {
